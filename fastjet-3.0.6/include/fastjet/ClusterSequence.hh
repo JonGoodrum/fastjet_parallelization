@@ -92,7 +92,6 @@ class ClusterSequence {
 				  const JetDefinition & jet_def,
 				  const bool & writeout_combinations = false);
   
-  
   /// copy constructor for a ClusterSequence
   ClusterSequence (const ClusterSequence & cs) : _deletes_self_when_unused(false) {
     transfer_from_sequence(cs);
@@ -1030,12 +1029,6 @@ public :
   ThreadManager * tman;
 
 
-template<class L> ClusterSequence (  //ctor
-                                  const std::vector<L> & pseudojets, 
-                                  const JetDefinition & jet_def, 
-                                  ThreadManager * referent_thread_manager, 
-                                  std::vector<Tile> * referent_tiles, 
-                                  const bool & writeout_combinations = false);
 
 
 ////////////end of concurrent information //**//
@@ -1103,13 +1096,13 @@ template<class L> ClusterSequence::ClusterSequence (
 
   // run the clustering
   _initialise_and_run_no_decant();
-};
+}
 /////////////////////////////////////////////////////////////////////BEGIN PARALLEL CTOR
 template<class L> ClusterSequence::ClusterSequence (
 			          const std::vector<L> & pseudojets,
 				  const JetDefinition & jet_def_in,
-                                  ThreadManager * referent_thread_manager,
-				  std::vector<Tile> * referent_tiles,
+                                  const ThreadManager * referent_thread_manager,
+				  const std::vector<Tile> * referent_tiles,
 				  const bool & writeout_combinations) :
   _jet_def(jet_def_in), _writeout_combinations(writeout_combinations),
   _structure_shared_ptr(new ClusterSequenceStructure(this))
